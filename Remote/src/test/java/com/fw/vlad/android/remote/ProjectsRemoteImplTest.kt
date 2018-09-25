@@ -17,10 +17,10 @@ import org.mockito.MockitoAnnotations
 class ProjectsRemoteImplTest {
 
     @Mock
-    lateinit var mapper: ProjectsResponseModelMapper
+    private lateinit var mapper: ProjectsResponseModelMapper
     @Mock
-    lateinit var service: GithubTrendingService
-    lateinit var remote: ProjectsRemoteImpl
+    private lateinit var service: GithubTrendingService
+    private lateinit var remote: ProjectsRemoteImpl
 
     @Before
     fun setup() {
@@ -62,7 +62,6 @@ class ProjectsRemoteImplTest {
         val entities = response.items.map { mapper.mapFromModel(it) }
         val testObserver = remote.getProjects().test()
         testObserver.assertValue(entities)
-
     }
 
     @Test
