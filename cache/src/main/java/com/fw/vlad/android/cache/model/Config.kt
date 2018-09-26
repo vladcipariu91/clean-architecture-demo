@@ -8,4 +8,4 @@ import com.fw.vlad.android.cache.db.ConfigConstants
 data class Config(
         @PrimaryKey(autoGenerate = true)
         var id: Int = -1,
-        var lastCacheTime: String)
+        var lastCacheTime: Long)
