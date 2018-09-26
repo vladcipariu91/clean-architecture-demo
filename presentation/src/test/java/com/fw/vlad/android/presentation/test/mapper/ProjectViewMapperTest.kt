@@ -26,5 +26,4 @@ class ProjectViewMapperTest {
         assertEquals(project.ownerAvatar, projectView.ownerAvatar)
         assertEquals(project.isBookmarked, projectView.isBookmarked)
     }
-
 }
