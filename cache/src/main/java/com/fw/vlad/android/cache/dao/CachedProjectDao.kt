@@ -24,9 +24,9 @@ abstract class CachedProjectDao {
     abstract fun deleteProjects()
 
     @Query(QUERY_BOOKMARKED_PROJECTS)
-    abstract fun getBookmarkerProjects(): Flowable<List<CachedProject>>
+    abstract fun getBookmarkedProjects(): Flowable<List<CachedProject>>
 
     @Query(QUERY_UPDATE_BOOKMARK_STATUS)
-    abstract fun setBookmarkedStatus(isBookmarked: Boolean,
+    abstract fun setBookmarkStatus(isBookmarked: Boolean,
                                      projectId: String)
 }

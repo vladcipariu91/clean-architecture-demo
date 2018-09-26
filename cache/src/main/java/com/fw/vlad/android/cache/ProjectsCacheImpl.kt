@@ -1,7 +1,6 @@
 package com.fw.vlad.android.cache
 
 import com.fw.vlad.android.cache.db.ProjectsDatabase
-import com.fw.vlad.android.cache.mapper.CacheMapper
 import com.fw.vlad.android.cache.mapper.CachedProjectMapper
 import com.fw.vlad.android.cache.model.Config
 import com.fw.vlad.android.data.model.ProjectEntity
@@ -38,7 +37,7 @@ class ProjectsCacheImpl @Inject constructor(private val projectsDatabase: Projec
     }
 
     override fun getBookmarkedProjects(): Observable<List<ProjectEntity>> {
-        return projectsDatabase.cachedProjectsDao().getBookmarkerProjects()
+        return projectsDatabase.cachedProjectsDao().getBookmarkedProjects()
                 .toObservable()
                 .map {
                     it.map { project -> mapper.mapFromCached(project) }
@@ -47,14 +46,14 @@ class ProjectsCacheImpl @Inject constructor(private val projectsDatabase: Projec
 
     override fun setProjectAsBookmarked(projectId: String): Completable {
         return Completable.defer {
-            projectsDatabase.cachedProjectsDao().setBookmarkedStatus(true, projectId)
+            projectsDatabase.cachedProjectsDao().setBookmarkStatus(true, projectId)
             Completable.complete()
         }
     }
 
     override fun setProjectAsNotBookmarked(projectId: String): Completable {
         return Completable.defer {
-            projectsDatabase.cachedProjectsDao().setBookmarkedStatus(false, projectId)
+            projectsDatabase.cachedProjectsDao().setBookmarkStatus(false, projectId)
             Completable.complete()
         }
     }
