@@ -1,4 +1,4 @@
-package com.fw.vlad.android
+package com.fw.vlad.android.test.factory
 
 import com.fw.vlad.android.cache.model.CachedProject
 import com.fw.vlad.android.data.model.ProjectEntity

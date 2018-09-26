@@ -1,4 +1,4 @@
-package com.fw.vlad.android
+package com.fw.vlad.android.test.factory
 
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
