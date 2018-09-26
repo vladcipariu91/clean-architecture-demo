@@ -8,7 +8,6 @@ import com.fw.vlad.android.data.repository.ProjectsCache
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.rxkotlin.toSingle
 import javax.inject.Inject
 
 class ProjectsCacheImpl @Inject constructor(private val projectsDatabase: ProjectsDatabase,
@@ -74,7 +73,7 @@ class ProjectsCacheImpl @Inject constructor(private val projectsDatabase: Projec
         val currentTime = System.currentTimeMillis()
         val expirationTime = (60 * 1000 * 10).toLong()
         return projectsDatabase.configDao().getConfig()
-                .first(Config(lastCacheTime = 0L))
+                .onErrorResumeNext { Single.just(Config(lastCacheTime = 0L)) }
                 .map {
                     currentTime - it.lastCacheTime > expirationTime
                 }
