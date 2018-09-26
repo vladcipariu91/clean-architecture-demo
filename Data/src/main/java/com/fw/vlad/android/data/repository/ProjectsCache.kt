@@ -13,7 +13,7 @@ interface ProjectsCache {
 
     fun clearProjects(): Completable
 
-    fun saveProject(projects: List<ProjectEntity>): Completable
+    fun saveProjects(projects: List<ProjectEntity>): Completable
 
     fun getProjects(): Observable<List<ProjectEntity>>
 
@@ -27,5 +27,5 @@ interface ProjectsCache {
 
     fun setLastCacheTime(lastCache: Long): Completable
 
-    fun isProjectCacheExpired(): Single<Boolean>
+    fun isProjectsCacheExpired(): Single<Boolean>
 }

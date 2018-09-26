@@ -8,6 +8,7 @@ import com.fw.vlad.android.data.repository.ProjectsCache
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.rxkotlin.toSingle
 import javax.inject.Inject
 
 class ProjectsCacheImpl @Inject constructor(private val projectsDatabase: ProjectsDatabase,
@@ -20,7 +21,7 @@ class ProjectsCacheImpl @Inject constructor(private val projectsDatabase: Projec
         }
     }
 
-    override fun saveProject(projects: List<ProjectEntity>): Completable {
+    override fun saveProjects(projects: List<ProjectEntity>): Completable {
         return Completable.defer {
             projectsDatabase.cachedProjectsDao().insertProjects(
                     projects.map { mapper.mapToCached(it) })
@@ -69,11 +70,11 @@ class ProjectsCacheImpl @Inject constructor(private val projectsDatabase: Projec
         }
     }
 
-    override fun isProjectCacheExpired(): Single<Boolean> {
+    override fun isProjectsCacheExpired(): Single<Boolean> {
         val currentTime = System.currentTimeMillis()
         val expirationTime = (60 * 1000 * 10).toLong()
         return projectsDatabase.configDao().getConfig()
-                .single(Config(lastCacheTime = 0))
+                .first(Config(lastCacheTime = 0L))
                 .map {
                     currentTime - it.lastCacheTime > expirationTime
                 }

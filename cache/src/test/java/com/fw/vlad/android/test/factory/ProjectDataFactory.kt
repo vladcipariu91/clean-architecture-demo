@@ -26,7 +26,7 @@ object ProjectDataFactory {
                 DataFactory.randomUuid(), DataFactory.randomUuid(),
                 DataFactory.randomUuid(), DataFactory.randomUuid(),
                 DataFactory.randomUuid(), DataFactory.randomUuid(),
-                DataFactory.randomBoolean())
+                false)
     }
 
     fun makeBookmarkedProjectEntity(): ProjectEntity {

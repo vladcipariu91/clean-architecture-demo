@@ -66,7 +66,7 @@ class ProjectsCacheDataStoreTest {
 
         val projectEntities = listOf(ProjectFactory.makeProjectEntity())
         store.saveProjects(projectEntities).test()
-        verify(cache).saveProject(projectEntities)
+        verify(cache).saveProjects(projectEntities)
         verify(cache).setLastCacheTime(anyLong())
     }
 
@@ -150,7 +150,7 @@ class ProjectsCacheDataStoreTest {
     }
 
     private fun stubProjectCacheSaveProject(completable: Completable) {
-        `when`(cache.saveProject(anyList()))
+        `when`(cache.saveProjects(anyList()))
                 .thenReturn(completable)
     }
 

@@ -109,7 +109,7 @@ class ProjectsDataRepositoryTest {
     }
 
     private fun stubIsCacheExpired(single: Single<Boolean>) {
-        `when`(cache.isProjectCacheExpired())
+        `when`(cache.isProjectsCacheExpired())
                 .thenReturn(single)
     }
 
