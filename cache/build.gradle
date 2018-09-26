@@ -3,17 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    def globalConfiguration = rootProject.extension.getByName("ext")
-    compileSdkVersion 28
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
     }
 
     buildTypes {
@@ -23,13 +20,31 @@ android {
         }
     }
 
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def cacheDependencies = rootProject.ext.cacheDependencies
+    def cacheTestDependencies = rootProject.ext.cacheTestDependencies
 
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    compileOnly cacheDependencies.javaxAnnotation
+
+    implementation project(':Data')
+
+    implementation cacheDependencies.kotlin
+    implementation cacheDependencies.javaxInject
+    implementation cacheDependencies.rxKotlin
+    implementation cacheDependencies.roomRuntime
+    implementation cacheDependencies.roomRxJava
+    kapt cacheDependencies.roomCompiler
+
+    testImplementation cacheTestDependencies.junit
+    testImplementation cacheTestDependencies.kotlinJUnit
+    testImplementation cacheTestDependencies.mockito
+    testImplementation cacheTestDependencies.assertj
+    testImplementation cacheTestDependencies.robolectric
+    testImplementation cacheTestDependencies.archTesting
+    testImplementation cacheTestDependencies.roomTesting
+    androidTestImplementation 'com.android.support:support-annotations:27.1.0'
+    androidTestImplementation 'junit:junit:4.12'
 }
