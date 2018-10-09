@@ -98,5 +98,4 @@ class BrowseBookmarkedProjectsViewModelTest {
         whenever(mapper.mapToView(project))
                 .thenReturn(projectView)
     }
-
 }

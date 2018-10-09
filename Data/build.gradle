@@ -6,7 +6,7 @@ dependencies {
 
     // This is the module providing the Data layer with the interface it needs to implement the
     // flow of data between them
-    compile project(':Domain')
+    implementation project(':Domain')
 
     implementation dataDependencies.javaxAnnotation
     implementation dataDependencies.kotlin
