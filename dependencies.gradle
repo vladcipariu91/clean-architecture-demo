@@ -120,7 +120,7 @@ ext {
             androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
             archRuntime       : "android.arch.lifecycle:runtime:${archCompVersion}",
             archExtensions    : "android.arch.lifecycle:extensions:${archCompVersion}",
-            archCompiler      : "android.arch.lifecycle:compiler:${archCompVersion}",
+            archCompiler      : "android.arch.lifecycle:compiler:${archCompVersion}"
     ]
 
     presentationTestDependencies = [
@@ -129,7 +129,7 @@ ext {
             assertj    : "org.assertj:assertj-core:${assertJVersion}",
             mockito    : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
             robolectric: "org.robolectric:robolectric:${robolectricVersion}",
-            archTesting: "android.arch.core:core-testing:${archCompVersion}",
+            archTesting: "android.arch.core:core-testing:${archCompVersion}"
     ]
 
     mobileUiDependencies = [
@@ -154,6 +154,9 @@ ext {
             roomRuntime:        "android.arch.persistence.room:runtime:${archCompVersion}",
             roomCompiler:       "android.arch.persistence.room:compiler:${archCompVersion}",
             roomRxJava:         "android.arch.persistence.room:rxjava2:${archCompVersion}",
+            archRuntime       : "android.arch.lifecycle:runtime:${archCompVersion}",
+            archExtensions    : "android.arch.lifecycle:extensions:${archCompVersion}",
+            archCompiler      : "android.arch.lifecycle:compiler:${archCompVersion}"
     ]
 
     mobileUiTestDependencies = [
