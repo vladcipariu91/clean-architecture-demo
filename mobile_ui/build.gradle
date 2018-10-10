@@ -37,6 +37,7 @@ dependencies {
     implementation project(':Data')
     implementation project(':Remote')
     implementation project(':cache')
+    implementation project(':Domain')
 
     implementation mobileUiDependencies.javaxAnnotation
 
