@@ -38,8 +38,8 @@ class ProjectsDataRepository @Inject constructor(
                             .saveProjects(it)
                             .andThen(Observable.just(it))
                 }
-                .map {
-                    it.map {
+                .map { projectEntities ->
+                    projectEntities.map {
                         projectMapper.mapFromEntity(it)
                     }
                 }

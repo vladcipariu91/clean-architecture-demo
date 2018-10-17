@@ -11,25 +11,29 @@ import com.fw.vlad.android.cache.model.Config
 import javax.inject.Inject
 
 @Database(entities = [CachedProject::class, Config::class], version = 1)
-abstract class ProjectsDatabase @Inject constructor(): RoomDatabase() {
+abstract class ProjectsDatabase @Inject constructor() : RoomDatabase() {
 
     abstract fun cachedProjectsDao(): CachedProjectDao
 
     abstract fun configDao(): ConfigDao
 
-    private var INSTANCE: ProjectsDatabase? = null
-    private var lock = Any()
+    companion object {
 
-    fun getInstance(context: Context): ProjectsDatabase {
-        if (INSTANCE == null) {
-            synchronized(lock) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            ProjectsDatabase::class.java, "projects.db").build()
+        private var INSTANCE: ProjectsDatabase? = null
+        private var lock = Any()
+
+        @JvmStatic
+        fun getInstance(context: Context): ProjectsDatabase {
+            if (INSTANCE == null) {
+                synchronized(lock) {
+                    if (INSTANCE == null) {
+                        INSTANCE = Room.databaseBuilder(context.applicationContext,
+                                ProjectsDatabase::class.java, "projects.db").build()
+                    }
+                    return INSTANCE as ProjectsDatabase
                 }
-                return INSTANCE as ProjectsDatabase
             }
+            return INSTANCE as ProjectsDatabase
         }
-        return INSTANCE as ProjectsDatabase
     }
 }
