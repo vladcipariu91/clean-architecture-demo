@@ -18,7 +18,7 @@ class ViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         var creator: Provider<out ViewModel>? = creators[modelClass]
 
-        // if something doesn't go quite right, find out what that something could be
+        //TODO: if something doesn't go quite right, find out what that something could be
         if (creator == null) {
             for ((key, value) in creators) {
                 if (modelClass.isAssignableFrom(key)) {
