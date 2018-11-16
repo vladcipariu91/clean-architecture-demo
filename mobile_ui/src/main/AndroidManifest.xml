@@ -24,5 +24,8 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name=".bookmarked.BookmarkedActivity"
+            android:label="@string/title_bookmarked" />
     </application>
 </manifest>
