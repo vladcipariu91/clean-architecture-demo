@@ -1,2 +1,2 @@
 # clean-architecture-demo
-![alt text](https://www.seti.org/sites/default/files/inline-images/Arecibo-message%20copy.png)
+![alt text](read_me_resources/clean_architecture_diagram.png)
