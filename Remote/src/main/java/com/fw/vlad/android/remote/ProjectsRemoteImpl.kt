@@ -18,5 +18,13 @@ class ProjectsRemoteImpl @Inject constructor(
                         mapper.mapFromModel(projectModel)
                     }
                 }
+                .doOnNext {
+                    it.forEach {
+                        println("Stuff ${it.fullName}")
+                    }
+                }
+                .doOnError {
+                    it.printStackTrace()
+                }
     }
 }

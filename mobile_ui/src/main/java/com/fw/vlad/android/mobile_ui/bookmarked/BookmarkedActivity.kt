@@ -3,6 +3,7 @@ package com.fw.vlad.android.mobile_ui.bookmarked
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
@@ -49,6 +50,16 @@ class BookmarkedActivity : AppCompatActivity() {
                 .get(BrowseBookmarkedProjectsViewModel::class.java)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupBrowseRecycler()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onStart() {

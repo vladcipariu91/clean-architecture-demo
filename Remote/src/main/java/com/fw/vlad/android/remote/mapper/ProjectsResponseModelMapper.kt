@@ -2,8 +2,9 @@ package com.fw.vlad.android.remote.mapper
 
 import com.fw.vlad.android.data.model.ProjectEntity
 import com.fw.vlad.android.remote.model.ProjectModel
+import javax.inject.Inject
 
-class ProjectsResponseModelMapper : ModelMapper<ProjectModel, ProjectEntity> {
+class ProjectsResponseModelMapper @Inject constructor() : ModelMapper<ProjectModel, ProjectEntity> {
 
     override fun mapFromModel(model: ProjectModel): ProjectEntity {
         return ProjectEntity(

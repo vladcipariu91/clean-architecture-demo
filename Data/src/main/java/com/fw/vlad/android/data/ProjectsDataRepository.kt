@@ -18,10 +18,10 @@ import javax.inject.Inject
  * the domain module and the remote / cache modules.
  */
 class ProjectsDataRepository @Inject constructor(
-        private val projectMapper: ProjectMapper,
+        private val mapper: ProjectMapper,
         private val cache: ProjectsCache,
-        private val factory: ProjectsDataStoreFactory
-) : ProjectsRepository {
+        private val factory: ProjectsDataStoreFactory)
+    : ProjectsRepository {
 
     override fun getProjects(): Observable<List<Project>> {
         return Observable.zip(cache.areProjectsCached().toObservable(),
@@ -30,17 +30,17 @@ class ProjectsDataRepository @Inject constructor(
                     Pair(areCached, isExpired)
                 })
                 .flatMap {
-                    factory.getDataStore(it.first, it.second)
-                            .getProjects()
+                    factory.getDataStore(it.first, it.second).getProjects()
+                            .distinctUntilChanged()
                 }
-                .flatMap {
+                .flatMap { projects ->
                     factory.getCacheDataStore()
-                            .saveProjects(it)
-                            .andThen(Observable.just(it))
+                            .saveProjects(projects)
+                            .andThen(Observable.just(projects))
                 }
-                .map { projectEntities ->
-                    projectEntities.map {
-                        projectMapper.mapFromEntity(it)
+                .map {
+                    it.map {
+                        mapper.mapFromEntity(it)
                     }
                 }
     }
@@ -55,10 +55,6 @@ class ProjectsDataRepository @Inject constructor(
 
     override fun getBookmarkedProjects(): Observable<List<Project>> {
         return factory.getCacheDataStore().getBookmarkedProjects()
-                .map {
-                    it.map {
-                        projectMapper.mapFromEntity(it)
-                    }
-                }
+                .map { it.map { mapper.mapFromEntity(it) } }
     }
 }
