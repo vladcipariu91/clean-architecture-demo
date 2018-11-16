@@ -3,6 +3,7 @@ package com.fw.vlad.android.mobile_ui.injection.module
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fw.vlad.android.mobile_ui.injection.ViewModelFactory
+import com.fw.vlad.android.presentation.BrowseBookmarkedProjectsViewModel
 import com.fw.vlad.android.presentation.BrowseProjectsViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -17,6 +18,11 @@ abstract class PresentationModule {
     @IntoMap
     @ViewModelKey(BrowseProjectsViewModel::class)
     abstract fun bindBrowseBookmarkedProjectsViewModel(viewModel: BrowseProjectsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BrowseBookmarkedProjectsViewModel::class)
+    abstract fun bindBrowseBookmarkedProjectsViewModel(viewModel: BrowseBookmarkedProjectsViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
